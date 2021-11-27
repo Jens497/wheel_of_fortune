@@ -1,14 +1,12 @@
 package com.example.s190265lykkehjulet.adapter
 
-import android.content.Context
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s190265lykkehjulet.R
-import com.example.s190265lykkehjulet.model.DataSource
+import com.example.s190265lykkehjulet.data.DataSource
 
 class HelpAdapter() : RecyclerView.Adapter<HelpAdapter.HelpViewHolder>() {
 

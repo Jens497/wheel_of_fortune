@@ -39,7 +39,7 @@ class GameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val linearLayout = requireView().findViewById<LinearLayout>(R.id.layout_border)
 
-        val btn = view.findViewById<Button>(R.id.test_btn)
+        val btn = view.findViewById<Button>(R.id.guess_btn)
         btn.setOnClickListener {
             addBorderedView(requireContext(), linearLayout, "467816dgshja")
         }

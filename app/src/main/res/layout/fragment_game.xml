@@ -33,8 +33,12 @@
         android:layout_height="wrap_content"
         android:text="@string/category"
         android:gravity="center"
-        app:layout_constraintStart_toEndOf="@id/point_text"
-        app:layout_constraintTop_toBottomOf="@id/point_text"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
         tools:text="Category"/>
 
     <LinearLayout
@@ -42,24 +46,80 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/layout_border"
-        app:layout_constraintStart_toStartOf="@id/category_text"
-        app:layout_constraintTop_toBottomOf="@id/category_text">
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/category_text"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="parent"
-            android:text="Test"/>
+            tools:text="Word/phrase"/>
     </LinearLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/guess_letter"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/guess_a_letter"
+        android:layout_marginTop="100dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/layout_border"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/guess_letter_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
     <Button
-        android:id="@+id/test_btn"
-        android:text="Test"
+        android:id="@+id/guess_btn"
+        android:text="@string/guess"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/layout_border"
-        app:layout_constraintTop_toBottomOf="@id/layout_border"/>
+        android:layout_marginTop="150dp"
+        android:clickable="false"
+        app:layout_constraintBottom_toTopOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/guess_letter"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <!-- Used to output what the player landed on eg. "extra life" or "1000 points"-->
+    <TextView
+        android:id="@+id/spin_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/guess_btn"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:text="Spin text"/>
+
+    <Button
+        android:id="@+id/spin_wheel_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/spin_the_wheel"
+        android:layout_marginTop="220dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/spin_text"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

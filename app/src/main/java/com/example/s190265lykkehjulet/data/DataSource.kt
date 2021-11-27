@@ -1,22 +1,22 @@
-package com.example.s190265lykkehjulet.model
+package com.example.s190265lykkehjulet.data
 
-import com.example.s190265lykkehjulet.viewModel.Round
+import com.example.s190265lykkehjulet.model.Round
 
 object DataSource {
 
     val rounds: List<Round> = listOf(
         Round(
             "Person/actor",
-        "Matt Leblanc"
-        ),Round(
+        "Matt-Leblanc"
+        ), Round(
             "Person/actor",
-            "Matthew Perry"
-        ),Round(
+            "Matthew-Perry"
+        ), Round(
             "Programming Language",
             "Python"
-        ),Round(
+        ), Round(
             "Movie",
-            "No Time To Die"
+            "No-Time-To-Die"
         )
     )
 

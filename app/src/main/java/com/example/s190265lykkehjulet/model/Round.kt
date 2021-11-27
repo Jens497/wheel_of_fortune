@@ -1,4 +1,4 @@
-package com.example.s190265lykkehjulet.viewModel
+package com.example.s190265lykkehjulet.model
 
 data class Round(
     val category: String,
