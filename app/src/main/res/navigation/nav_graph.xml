@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_homeFragment_to_helpListFragment"
             app:destination="@id/helpListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
     </fragment>
     <fragment
         android:id="@+id/helpListFragment"
         android:name="com.example.s190265lykkehjulet.HelpListFragment"
         android:label="@string/rules_page"
         tools:layout="@layout/fragment_help_list" />
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="com.example.s190265lykkehjulet.GameFragment"
+        android:label="fragment_game"
+        tools:layout="@layout/fragment_game" />
 </navigation>

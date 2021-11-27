@@ -28,9 +28,16 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val button = view.findViewById<Button>(R.id.button_help)
-        button.setOnClickListener{
+        val helpButton = view.findViewById<Button>(R.id.button_help)
+        val gameButton = view.findViewById<Button>(R.id.start_game)
+
+        helpButton.setOnClickListener{
             val action = HomeFragmentDirections.actionHomeFragmentToHelpListFragment()
+            findNavController().navigate(action)
+        }
+
+        gameButton.setOnClickListener{
+            val action = HomeFragmentDirections.actionHomeFragmentToGameFragment()
             findNavController().navigate(action)
         }
     }
