@@ -75,7 +75,9 @@
             android:id="@+id/guess_letter_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none"/>
+            android:maxLength="1"
+            android:enabled="false"
+            android:inputType="text"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

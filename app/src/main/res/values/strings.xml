@@ -10,4 +10,5 @@
     <string name="guess">Guess</string>
     <string name="guess_a_letter">Guess a letter</string>
     <string name="spin_the_wheel">Spin the wheel</string>
+    <string name="set_score">You got the %s points option</string>
 </resources>
