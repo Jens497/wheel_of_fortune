@@ -11,4 +11,10 @@
     <string name="guess_a_letter">Guess a letter</string>
     <string name="spin_the_wheel">Spin the wheel</string>
     <string name="set_score">You got the %s points option</string>
+    <string name="bankrupt">You landed on bankrupt and thereby loose all your points</string>
+    <string name="lost_life">You lost a life, and your turn will be skipped!</string>
+    <string name="extra_life">You got an extra life!</string>
+    <string name="won_game_text">Congratulations you won the game!</string>
+    <string name="play_again">Play again</string>
+    <string name="exit">Exit</string>
 </resources>

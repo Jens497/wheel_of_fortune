@@ -14,6 +14,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.s190265lykkehjulet.databinding.FragmentGameBinding
 import com.example.s190265lykkehjulet.databinding.FragmentHomeBinding
 import com.example.s190265lykkehjulet.model.Round
@@ -46,15 +47,20 @@ class GameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         var boolSkipTurn : Boolean = false
         val linearLayout = requireView().findViewById<LinearLayout>(R.id.layout_border)
+
         val btnGuess = view.findViewById<Button>(R.id.guess_btn)
+        btnGuess.isClickable = false
+
         val btnSpinWheel = view.findViewById<Button>(R.id.spin_wheel_btn)
         val wheelText = view.findViewById<TextView>(R.id.spin_text)
         val guessLetterText = view.findViewById<TextInputEditText>(R.id.guess_letter_text)
 
-        val round : Round = viewModel.getRound()
-        //Starts the game with a category and word/phrase
         val startString : String = viewModel.setStartString()
+        val round : Round = viewModel.getRound()
+
         view.findViewById<TextView>(R.id.category_text).text = round.category
+        view.findViewById<TextView>(R.id.lives_text).text = getString(R.string.lives, viewModel.getTotalLives().toString())
+        view.findViewById<TextView>(R.id.point_text).text = getString(R.string.points, viewModel.getTotalScore().toString())
         addBorderedView(requireContext(), linearLayout, startString)
 
         btnSpinWheel.setOnClickListener {
@@ -62,45 +68,69 @@ class GameFragment : Fragment() {
             when(val wheelOption = viewModel.getWheelOption()) {
                 1 -> {
                     viewModel.setLives(wheelOption)
-                    wheelText.text = "You got an extra life!" // Don't use hardcoded string
+                    wheelText.text = getString(R.string.extra_life) // Don't use hardcoded string
                     view.findViewById<TextView>(R.id.lives_text).text = getString(R.string.lives, viewModel.getTotalLives().toString())
                 }
 
                 -1 -> {
                     viewModel.setLives(wheelOption)
                     boolSkipTurn = true
-                    wheelText.text = "You lost a life, and your turn will be skipped!" // Don't use hardcoded string
+                    //wheelText.text = "You lost a life, and your turn will be skipped!" // Don't use hardcoded string
+                    wheelText.text = getString(R.string.lost_life)
                     view.findViewById<TextView>(R.id.lives_text).text = getString(R.string.lives, viewModel.getTotalLives().toString())
+
+                    if(viewModel.getTotalLives() == 0){
+                        val action = GameFragmentDirections.actionGameFragmentToLoseGameFragment()
+                        findNavController().navigate(action)
+                    }
+                }
+
+                0 -> {
+                    viewModel.setScore(-viewModel.getTotalScore())
+                    wheelText.text = getString(R.string.bankrupt)
+                    view.findViewById<TextView>(R.id.point_text).text = getString(R.string.points, viewModel.getTotalScore().toString())
                 }
                 else -> {
                     viewModel.setScore(wheelOption)
                     wheelText.text = getString(R.string.set_score, wheelOption.toString())
-                    view.findViewById<TextView>(R.id.point_text).text = getString(R.string.points, viewModel.getTotalScore().toString())
                 }
             }
             if (!boolSkipTurn) {
+                //Log.d("onviewcreated", "setting btnguess to clickable")
                 btnGuess.isClickable = true
                 guessLetterText.isEnabled = true
             }
 
             boolSkipTurn = false
+            btnSpinWheel.isClickable = false
         }
 
         btnGuess.setOnClickListener {
 
             val letterGuessed : String = guessLetterText.text.toString()
-            if (viewModel.checkLetterInString(letterGuessed, viewModel.getCurrentWordPhrase()))
-                addBorderedView(requireContext(), linearLayout, viewModel.searchAndReplaceWithLetter(letterGuessed))
+            if (viewModel.getRound().wordOrPhrase.lowercase().contains(letterGuessed.lowercase())) {
+                addBorderedView(
+                    requireContext(),
+                    linearLayout,
+                    viewModel.searchAndReplaceWithLetter(letterGuessed)
+                )
+                view.findViewById<TextView>(R.id.point_text).text =
+                    getString(R.string.points, viewModel.getTotalScore().toString())
 
-
+                if(viewModel.getCurrentWordPhrase() == viewModel.getRound().wordOrPhrase){
+                    //Thread.sleep(2000) // Sleep 2 seconds before changing to winning menu
+                    val action = GameFragmentDirections.actionGameFragmentToWinGameFragment()
+                    findNavController().navigate(action)
+                }
+            }
 
             btnGuess.isClickable = false
             guessLetterText.isEnabled = false
+            guessLetterText.text?.clear()
+            btnSpinWheel.isClickable = true
+
         }
 
-        /*btn.setOnClickListener {
-            addBorderedView(requireContext(), linearLayout, "467816dgshja")
-        }*/
     }
 
     override fun onDestroyView() {
@@ -109,14 +139,11 @@ class GameFragment : Fragment() {
     }
 
     private fun addBorderedView(context: Context, layout: LinearLayout, stringDisplay: String){
-        //Log.d("Binding", "In method")
         val stringArray: MutableList<String> = stringDisplay.split("").toMutableList()
         stringArray.removeAt(0)
         stringArray.removeAt(stringArray.size-1)
-        //Log.d("Testing", stringDisplay)
         layout.removeAllViews()
         for(i in stringArray.indices) {
-            //Log.d("Testing", stringArray[i])
             val borderedTextView: TextView =
                 LayoutInflater.from(context).inflate(R.layout.border_text_view, null) as TextView
             borderedTextView.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)

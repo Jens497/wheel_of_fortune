@@ -6,8 +6,9 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.s190265lykkehjulet.databinding.ActivityMainBinding
+import kotlin.system.exitProcess
 
-class MainActivity : AppCompatActivity() {
+open class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
 
@@ -26,5 +27,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+    fun quitApp(){
+        this@MainActivity.finish()
+        exitProcess(0)
     }
 }
