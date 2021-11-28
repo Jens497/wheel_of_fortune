@@ -29,8 +29,8 @@ open class MainActivity : AppCompatActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    fun quitApp(){
+    /*fun quitApp(){
         this@MainActivity.finish()
         exitProcess(0)
-    }
+    }*/
 }

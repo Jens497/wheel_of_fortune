@@ -24,7 +24,7 @@ object DataSource {
         "You start the game with 5 lives.",
         "When the game starts, a word is randomly chosen from predefined categories and displayed \n" +
                 "along with the category.",
-        "A word or phrase will be displayed with the letters hidden. If its a phrase it will be seprated by a ';'",
+        "A word or phrase will be displayed with the letters hidden. If it's a phrase the words will be separated by a '-'",
         "Tap 'get word' to get the new word, to be guessed.",
         "You can get up to 1500 points per. letter you get right.",
         "If you hit extra turn you will get an extra life, and if you hit miss turn, you will loose a life and the round.",

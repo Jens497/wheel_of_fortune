@@ -25,8 +25,8 @@
     <fragment
         android:id="@+id/gameFragment"
         android:name="com.example.s190265lykkehjulet.GameFragment"
-        android:label="fragment_game"
-        tools:layout="@layout/fragment_game" >
+        android:label="@string/game_page"
+        tools:layout="@layout/fragment_game">
         <action
             android:id="@+id/action_gameFragment_to_winGameFragment"
             app:destination="@id/winGameFragment" />
@@ -37,8 +37,8 @@
     <fragment
         android:id="@+id/winGameFragment"
         android:name="com.example.s190265lykkehjulet.WinGameFragment"
-        android:label="fragment_win_game"
-        tools:layout="@layout/fragment_win_game" >
+        android:label="@string/game_page"
+        tools:layout="@layout/fragment_win_game">
         <action
             android:id="@+id/action_winGameFragment_to_gameFragment2"
             app:destination="@id/gameFragment" />
@@ -46,7 +46,7 @@
     <fragment
         android:id="@+id/loseGameFragment"
         android:name="com.example.s190265lykkehjulet.LoseGameFragment"
-        android:label="LoseGameFragment" >
+        android:label="@string/game_page">
         <action
             android:id="@+id/action_loseGameFragment_to_gameFragment"
             app:destination="@id/gameFragment" />

@@ -14,9 +14,9 @@ class GameViewModel : ViewModel() {
 
     //Player "stats"
     private var _score = 0
-    val score: Int get() = _score
+    private val score: Int get() = _score
     private var _lives = 5
-    val lives : Int get() = _lives
+    private val lives : Int get() = _lives
 
     /**
      * Player related stats

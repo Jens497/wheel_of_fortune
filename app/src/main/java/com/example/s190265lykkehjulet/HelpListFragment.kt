@@ -36,10 +36,6 @@ class HelpListFragment : Fragment() {
         recyclerView.addItemDecoration(
             DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         )
-
-        //ecyclerView = binding.recyclerView
-        //recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        //recyclerView.adapter = HelpAdapter(requireContext())
     }
 
     override fun onDestroyView() {

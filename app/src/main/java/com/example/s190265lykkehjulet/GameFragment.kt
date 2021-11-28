@@ -65,6 +65,7 @@ class GameFragment : Fragment() {
 
         btnSpinWheel.setOnClickListener {
 
+            btnSpinWheel.isClickable = false
             when(val wheelOption = viewModel.getWheelOption()) {
                 1 -> {
                     viewModel.setLives(wheelOption)
@@ -75,11 +76,12 @@ class GameFragment : Fragment() {
                 -1 -> {
                     viewModel.setLives(wheelOption)
                     boolSkipTurn = true
+                    btnSpinWheel.isClickable = true
                     //wheelText.text = "You lost a life, and your turn will be skipped!" // Don't use hardcoded string
                     wheelText.text = getString(R.string.lost_life)
                     view.findViewById<TextView>(R.id.lives_text).text = getString(R.string.lives, viewModel.getTotalLives().toString())
 
-                    if(viewModel.getTotalLives() == 0){
+                    if(viewModel.getTotalLives() <= 0){
                         val action = GameFragmentDirections.actionGameFragmentToLoseGameFragment()
                         findNavController().navigate(action)
                     }
@@ -96,38 +98,48 @@ class GameFragment : Fragment() {
                 }
             }
             if (!boolSkipTurn) {
-                //Log.d("onviewcreated", "setting btnguess to clickable")
                 btnGuess.isClickable = true
                 guessLetterText.isEnabled = true
             }
 
             boolSkipTurn = false
-            btnSpinWheel.isClickable = false
+
         }
 
         btnGuess.setOnClickListener {
 
             val letterGuessed : String = guessLetterText.text.toString()
-            if (viewModel.getRound().wordOrPhrase.lowercase().contains(letterGuessed.lowercase())) {
-                addBorderedView(
-                    requireContext(),
-                    linearLayout,
-                    viewModel.searchAndReplaceWithLetter(letterGuessed)
-                )
-                view.findViewById<TextView>(R.id.point_text).text =
-                    getString(R.string.points, viewModel.getTotalScore().toString())
+            if(!letterGuessed.isEmpty()) {
+                if (viewModel.getRound().wordOrPhrase.lowercase()
+                        .contains(letterGuessed.lowercase())
+                ) {
+                    addBorderedView(
+                        requireContext(),
+                        linearLayout,
+                        viewModel.searchAndReplaceWithLetter(letterGuessed)
+                    )
+                    view.findViewById<TextView>(R.id.point_text).text =
+                        getString(R.string.points, viewModel.getTotalScore().toString())
 
-                if(viewModel.getCurrentWordPhrase() == viewModel.getRound().wordOrPhrase){
-                    //Thread.sleep(2000) // Sleep 2 seconds before changing to winning menu
-                    val action = GameFragmentDirections.actionGameFragmentToWinGameFragment()
-                    findNavController().navigate(action)
+                    if (viewModel.getCurrentWordPhrase() == viewModel.getRound().wordOrPhrase) {
+                        //Thread.sleep(2000) // Sleep 2 seconds before changing to winning menu
+                        val action = GameFragmentDirections.actionGameFragmentToWinGameFragment()
+                        findNavController().navigate(action)
+                    }
+                } else{
+                    viewModel.setLives(-1)
+                    view.findViewById<TextView>(R.id.lives_text).text = getString(R.string.lives, viewModel.getTotalLives().toString())
+                    if(viewModel.getTotalLives() <= 0){
+                        val action = GameFragmentDirections.actionGameFragmentToLoseGameFragment()
+                        findNavController().navigate(action)
+                    }
                 }
-            }
 
-            btnGuess.isClickable = false
-            guessLetterText.isEnabled = false
-            guessLetterText.text?.clear()
-            btnSpinWheel.isClickable = true
+                btnGuess.isClickable = false
+                guessLetterText.isEnabled = false
+                guessLetterText.text?.clear()
+                btnSpinWheel.isClickable = true
+            }
 
         }
 
