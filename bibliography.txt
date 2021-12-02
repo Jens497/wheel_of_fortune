@@ -1,0 +1,4 @@
+https://stackoverflow.com/questions/46229329/android-textview-possible-to-border-each-letter-like-a-table-border
+https://www.baeldung.com/java-indexof-find-string-occurrences
+stackoverflow.com (for research on best practices)
+Googles guides/intros that we have done throughout the whole semester (what I used for most of my code)
