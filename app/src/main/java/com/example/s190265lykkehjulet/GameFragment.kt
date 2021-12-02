@@ -21,12 +21,6 @@ import com.example.s190265lykkehjulet.model.Round
 import com.example.s190265lykkehjulet.viewModel.GameViewModel
 import com.google.android.material.textfield.TextInputEditText
 
-
-/**
- * A simple [Fragment] subclass.
- * Use the [GameFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class GameFragment : Fragment() {
 
     private var _binding: FragmentGameBinding? = null
@@ -45,7 +39,7 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var boolSkipTurn : Boolean = false
+        var boolSkipTurn = false
         val linearLayout = requireView().findViewById<LinearLayout>(R.id.layout_border)
 
         val btnGuess = view.findViewById<Button>(R.id.guess_btn)
@@ -109,10 +103,11 @@ class GameFragment : Fragment() {
         btnGuess.setOnClickListener {
 
             val letterGuessed : String = guessLetterText.text.toString()
-            if(!letterGuessed.isEmpty()) {
+            if(letterGuessed.isNotEmpty() && !viewModel.getCurrentWordPhrase().lowercase().contains(letterGuessed.lowercase())) {
                 if (viewModel.getRound().wordOrPhrase.lowercase()
                         .contains(letterGuessed.lowercase())
                 ) {
+                    //Refreshing the borderedView to include the letters that has been guessed on.
                     addBorderedView(
                         requireContext(),
                         linearLayout,
@@ -122,7 +117,6 @@ class GameFragment : Fragment() {
                         getString(R.string.points, viewModel.getTotalScore().toString())
 
                     if (viewModel.getCurrentWordPhrase() == viewModel.getRound().wordOrPhrase) {
-                        //Thread.sleep(2000) // Sleep 2 seconds before changing to winning menu
                         val action = GameFragmentDirections.actionGameFragmentToWinGameFragment()
                         findNavController().navigate(action)
                     }
@@ -139,6 +133,12 @@ class GameFragment : Fragment() {
                 guessLetterText.isEnabled = false
                 guessLetterText.text?.clear()
                 btnSpinWheel.isClickable = true
+            } else{
+                if (letterGuessed.isEmpty()){
+                    wheelText.text = getString(R.string.empty_letter_guess)
+                } else{
+                    wheelText.text = getString(R.string.duplicate_guess, letterGuessed)//"You have already guessed on '${letterGuessed}'"
+                }
             }
 
         }
@@ -150,11 +150,14 @@ class GameFragment : Fragment() {
         _binding = null
     }
 
+    //Function to create the boxes around the letters for a word/phrase
     private fun addBorderedView(context: Context, layout: LinearLayout, stringDisplay: String){
+        //Change to charaArray, so removing first and last element of the list will become redundant
         val stringArray: MutableList<String> = stringDisplay.split("").toMutableList()
         stringArray.removeAt(0)
         stringArray.removeAt(stringArray.size-1)
         layout.removeAllViews()
+        // Loop through the whole string, to creted a borderedView on everysingle letter in the LinearLayout
         for(i in stringArray.indices) {
             val borderedTextView: TextView =
                 LayoutInflater.from(context).inflate(R.layout.border_text_view, null) as TextView

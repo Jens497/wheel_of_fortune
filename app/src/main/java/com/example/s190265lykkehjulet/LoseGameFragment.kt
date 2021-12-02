@@ -9,16 +9,10 @@ import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import kotlin.system.exitProcess
 
-
-/**
- * A simple [Fragment] subclass.
- * Use the [LoseGameFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class LoseGameFragment : Fragment() {
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) { //Redundant function
         super.onCreate(savedInstanceState)
 
     }

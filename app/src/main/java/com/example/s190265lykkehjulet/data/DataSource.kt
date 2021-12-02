@@ -15,8 +15,32 @@ object DataSource {
             "Programming Language",
             "Python"
         ), Round(
+            "Car brand",
+            "Mazda"
+        ), Round(
+            "Car brand",
+            "Fiat"
+        ), Round(
             "Movie",
-            "No-Time-To-Die"
+            "Venom"
+        ), Round(
+            "Movie",
+            "Kung-fu-panda"
+        ), Round(
+            "Programming Language",
+            "Kotlin"
+        ), Round(
+            "Tv series",
+            "Friends"
+        ), Round(
+            "Movie",
+            "Free-guy"
+        ), Round(
+            "Movie",
+            "Deadpool"
+        ), Round(
+            "Game",
+            "Wheel-of-fortune"
         )
     )
 

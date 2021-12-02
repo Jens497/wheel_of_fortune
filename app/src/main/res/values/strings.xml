@@ -21,4 +21,6 @@
     <string name="exit">Exit</string>
     <string name="rules">Rules</string>
     <string name="start_game">Start game</string>
+    <string name="empty_letter_guess">You need to enter a letter before guessing</string>
+    <string name="duplicate_guess">You have already guessed on letter: %s</string>
 </resources>

@@ -10,7 +10,7 @@ class GameViewModel : ViewModel() {
     private val wordCatList : List<Round> = DataSource.rounds
     private lateinit var round : Round
     private lateinit var currentWordPhrase : String
-    private val wheelOptions : List<Int> = listOf(100, 300, 500, 700, 900, 1100, 1300, 1500, 1, -1, 0)
+    private val wheelOptions : List<Int> = listOf(100, 300, 500, 700, 900, 1100, 1300, 1500, 1, -1, 0) //Changed this to a map rather than list
 
     //Player "stats"
     private var _score = 0
@@ -71,10 +71,6 @@ class GameViewModel : ViewModel() {
     }
 
     fun searchAndReplaceWithLetter(letter: String) : String{
-        Log.d("onviewcreated", "in searchAndReplace")
-        Log.d("onviewcreated", letter)
-        Log.d("onviewcreated", round.wordOrPhrase)
-        Log.d("onviewcreated", letter.single().toString())
         val indexes = mutableListOf<Int>()
         var index = 0
 
@@ -86,7 +82,6 @@ class GameViewModel : ViewModel() {
             }
         }
 
-        //Log.d("onviewcreated", indexes.toString())
         val tempCharArray = currentWordPhrase.toCharArray()
         for (i in indexes)
             tempCharArray[i] = round.wordOrPhrase.toCharArray()[i]

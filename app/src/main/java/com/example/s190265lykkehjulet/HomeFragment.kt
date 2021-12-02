@@ -9,18 +9,12 @@ import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import com.example.s190265lykkehjulet.databinding.FragmentHomeBinding
 
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) { //Redundant function
         super.onCreate(savedInstanceState)
     }
 
