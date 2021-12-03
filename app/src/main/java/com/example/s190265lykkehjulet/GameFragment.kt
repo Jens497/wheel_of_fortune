@@ -60,7 +60,7 @@ class GameFragment : Fragment() {
         btnSpinWheel.setOnClickListener {
 
             btnSpinWheel.isClickable = false
-            when(val wheelOption = viewModel.getWheelOption()) {
+            when(val wheelOption = viewModel.getSetWheelOption()) {
                 1 -> {
                     viewModel.setLives(wheelOption)
                     wheelText.text = getString(R.string.extra_life) // Don't use hardcoded string
@@ -87,7 +87,11 @@ class GameFragment : Fragment() {
                     view.findViewById<TextView>(R.id.point_text).text = getString(R.string.points, viewModel.getTotalScore().toString())
                 }
                 else -> {
-                    viewModel.setScore(wheelOption)
+                    //Log.d("Test", "Setting score")
+                    //Log.d("Test", wheelOption.toString())
+                    //Log.d("Test", viewModel.getGuessedLetterAmount().toString())
+
+                    //viewModel.setScore(wheelOption * viewModel.getGuessedLetterAmount())
                     wheelText.text = getString(R.string.set_score, wheelOption.toString())
                 }
             }
@@ -113,8 +117,11 @@ class GameFragment : Fragment() {
                         linearLayout,
                         viewModel.searchAndReplaceWithLetter(letterGuessed)
                     )
-                    view.findViewById<TextView>(R.id.point_text).text =
-                        getString(R.string.points, viewModel.getTotalScore().toString())
+                    if(viewModel.getWheelOption() != 1 && viewModel.getWheelOption() != 0) {
+                        viewModel.setScore(viewModel.getWheelOption() * viewModel.getGuessedLetterAmount())
+                        view.findViewById<TextView>(R.id.point_text).text =
+                            getString(R.string.points, viewModel.getTotalScore().toString())
+                    }
 
                     if (viewModel.getCurrentWordPhrase() == viewModel.getRound().wordOrPhrase) {
                         val action = GameFragmentDirections.actionGameFragmentToWinGameFragment()

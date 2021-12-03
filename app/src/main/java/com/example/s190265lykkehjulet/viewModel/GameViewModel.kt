@@ -10,6 +10,8 @@ class GameViewModel : ViewModel() {
     private val wordCatList : List<Round> = DataSource.rounds
     private lateinit var round : Round
     private lateinit var currentWordPhrase : String
+    private var guessedLetterAmount : Int = 0
+    private var wheelOption : Int = 0
     private val wheelOptions : List<Int> = listOf(100, 300, 500, 700, 900, 1100, 1300, 1500, 1, -1, 0) //Changed this to a map rather than list
 
     //Player "stats"
@@ -37,6 +39,14 @@ class GameViewModel : ViewModel() {
         return lives
     }
 
+    fun getGuessedLetterAmount() : Int {
+        return guessedLetterAmount
+    }
+
+    fun getWheelOption() : Int {
+        return wheelOption
+    }
+
     /**
      * String related stuff
      */
@@ -44,8 +54,10 @@ class GameViewModel : ViewModel() {
         round = wordCatList.random()
     }
 
-    fun getWheelOption() : Int {
-        return wheelOptions.random()
+    fun getSetWheelOption() : Int {
+        val opt = wheelOptions.random()
+        wheelOption = opt
+        return opt
     }
 
     fun getRound() : Round {
@@ -88,6 +100,8 @@ class GameViewModel : ViewModel() {
 
         //Log.d("onviewcreated", String(tempCharArray))
         //Log.d("onviewcreated", "\n")
+        guessedLetterAmount = indexes.size
+
         currentWordPhrase = String(tempCharArray)
         return String(tempCharArray)
     }
