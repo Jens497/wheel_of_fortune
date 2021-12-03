@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_winGameFragment_to_gameFragment2"
             app:destination="@id/gameFragment" />
+        <argument
+            android:name="score"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/loseGameFragment"

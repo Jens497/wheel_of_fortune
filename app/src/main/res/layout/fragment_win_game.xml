@@ -44,6 +44,21 @@
         app:layout_constraintTop_toBottomOf="@id/btn_play_again"
         android:text="@string/exit"/>
 
+    <TextView
+        android:id="@+id/score_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="120dp"
+        android:backgroundTint="@color/teal_200"
+        android:textAppearance="?attr/textAppearanceHeadline5"
+        android:textColor="@color/design_default_color_surface"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_play_again"
+        tools:text="text view"/>
+
     <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

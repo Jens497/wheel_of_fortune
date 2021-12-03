@@ -87,11 +87,6 @@ class GameFragment : Fragment() {
                     view.findViewById<TextView>(R.id.point_text).text = getString(R.string.points, viewModel.getTotalScore().toString())
                 }
                 else -> {
-                    //Log.d("Test", "Setting score")
-                    //Log.d("Test", wheelOption.toString())
-                    //Log.d("Test", viewModel.getGuessedLetterAmount().toString())
-
-                    //viewModel.setScore(wheelOption * viewModel.getGuessedLetterAmount())
                     wheelText.text = getString(R.string.set_score, wheelOption.toString())
                 }
             }
@@ -124,7 +119,7 @@ class GameFragment : Fragment() {
                     }
 
                     if (viewModel.getCurrentWordPhrase() == viewModel.getRound().wordOrPhrase) {
-                        val action = GameFragmentDirections.actionGameFragmentToWinGameFragment()
+                        val action = GameFragmentDirections.actionGameFragmentToWinGameFragment(score = viewModel.getTotalScore().toString())
                         findNavController().navigate(action)
                     }
                 } else{
